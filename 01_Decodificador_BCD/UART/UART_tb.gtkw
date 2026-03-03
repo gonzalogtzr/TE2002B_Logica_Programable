@@ -1,0 +1,34 @@
+[*]
+[*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
+[*] Tue Mar  3 19:10:37 2026
+[*]
+[dumpfile] "/home/gonzalo/Documents/TE2002B_Logica_Programable/01_Decodificador_BCD/UART/UART_tb.vcd"
+[dumpfile_mtime] "Tue Mar  3 19:10:06 2026"
+[dumpfile_size] 61562636
+[savefile] "/home/gonzalo/Documents/TE2002B_Logica_Programable/01_Decodificador_BCD/UART/UART_tb.gtkw"
+[timestart] 882000
+[size] 1920 1033
+[pos] -27 -24
+*-15.614643 1080600 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] UART_tb.
+[sst_width] 297
+[signals_width] 167
+[sst_expanded] 1
+[sst_vpaned_height] 309
+@28
+UART_tb.busy
+@200
+-
+@28
+UART_tb.UART_wire
+UART_tb.busy
+UART_tb.clk
+@22
+UART_tb.data_in[7:0]
+UART_tb.data_out[7:0]
+@28
+UART_tb.data_valid
+UART_tb.rst
+UART_tb.start
+[pattern_trace] 1
+[pattern_trace] 0
