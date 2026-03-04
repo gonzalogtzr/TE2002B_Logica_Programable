@@ -1,5 +1,8 @@
 module UART_tb();
 
+parameter ITERACIONES = 30;
+
+
 //Señales para el transmisor
 reg clk;
 reg rst;
@@ -46,7 +49,7 @@ begin
     #10;        
     rst = 0; // Desactiva el reset
     #20000; // Espera suficiente tiempo para que el sistema se estabilice
-    repeat(10) begin
+    repeat(ITERACIONES) begin
         data_in = $random % 256; // Carga un dato de prueba
         start = 1; // Inicia la transmisión
         #20;
