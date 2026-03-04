@@ -1,20 +1,41 @@
-module clock_divider(
-    input clk_in, // Reloj de entrada
-    input rst,    // Señal de reset
-    output reg clk_out // Reloj de salida dividido
+module clock_divider #(parameter FREQ=1) ( // Hz
+	input clk, rst,
+	output reg clk_div
 );
-reg [10:0] count; // Contador de 2 bits para dividir el reloj por 4
 
-always @(posedge clk_in or posedge rst) begin
-    if (rst) begin
-        count <= 0; // Reiniciar el contador al activar el reset
-        clk_out <= 0; // Reiniciar el reloj de salida al activar el reset
-    end else begin
-        count <= count + 1; // Incrementar el contador en cada flanco de subida del reloj de entrada
-        if (count == 11'b11111111111) begin // Cuando el contador llega a 2047 (división por 2048)
-            clk_out <= ~clk_out; // Cambiar el estado del reloj de salida
-            count <= 0; // Reiniciar el contador
-        end
-    end
-end
+	localparam CLK_FREQ=50_000_000; // 50 MHz
+	localparam COUNT_MAX=CLK_FREQ/(2*FREQ);
+	
+	reg [ceillog2(COUNT_MAX)-1:0] count;
+
+	always @(posedge clk or posedge rst) begin
+		if (rst)
+			count<=32'b0;
+		else if (count==COUNT_MAX)
+			count<=32'b0;
+		else 
+			count<=count+1;
+	end
+	
+	always @(posedge clk or posedge rst) begin
+		if(rst)
+			clk_div<=4'b0;
+		else if (count==COUNT_MAX)
+			clk_div<=~clk_div;
+		else
+			clk_div<=clk_div;
+	end
+	
+	//
+	function integer ceillog2;
+		input integer data;
+		integer i,result;
+		begin
+			for(i=0;2**i<data;i=i+1)
+				result=i+1;
+			ceillog2=result;
+		end
+	endfunction
+	//
+	
 endmodule
